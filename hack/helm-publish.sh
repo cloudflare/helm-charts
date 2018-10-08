@@ -9,7 +9,7 @@ WORKING_DIRECTORY="$PWD"
   exit 1
 }
 [ -z "$GITHUB_PAGES_BRANCH" ] && GITHUB_PAGES_BRANCH=gh-pages
-[ -z "$HELM_CHARTS_SOURCE" ] && HELM_CHARTS_SOURCE="$WORKING_DIRECTORY/stable"
+[ -z "$HELM_CHARTS_SOURCE" ] && HELM_CHARTS_SOURCE="$WORKING_DIRECTORY/charts"
 [ -d "$HELM_CHARTS_SOURCE" ] || {
   echo "ERROR: Could not find Helm charts in $HELM_CHARTS_SOURCE"
   exit 1

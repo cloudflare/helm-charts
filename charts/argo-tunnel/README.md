@@ -2,7 +2,7 @@
 
 ### TL;DR;
 ```console
-$ helm install --name argo-mydomain stable/argo-tunnel
+$ helm install --name anydomain cloudflare/argo-tunnel
 ```
 > **Tip**: See [Your First Tunnel][guide-first-tunnel].
 
@@ -24,7 +24,7 @@ and authenticated with Access if you’ve enabled those features for your accoun
 ### Installing the Chart
 To install the chart with the release name `argo-mydomain`:
 ```console
-$ helm install --name argo-mydomain stable/argo-tunnel
+$ helm install --name anydomain cloudflare/argo-tunnel
 ```
 > **Tip**: See [Your First Tunnel][guide-first-tunnel].
 
@@ -35,9 +35,9 @@ during installation.
 > **Tip**: List all releases using `helm list`
 
 ### Uninstalling the Chart
-To uninstall/delete the `argo-mydomain` deployment:
+To uninstall/delete the `anydomain` deployment:
 ```console
-$ helm delete argo-mydomain
+$ helm delete anydomain
 ```
 
 ### Configuration
@@ -51,18 +51,21 @@ Parameter | Description | Default
 `controller.image.pullPolicy` | controller container image pull policy | `Always`
 `controller.ingressClass` | name of the ingress class to route through this controller | `argo-tunnel`
 `controller.logLevel` | log-level for this controller | `2`
-`controller.replicaCount` | desired number of controller pods (load-balancers are required for values larger than 1). | `1`
-`loadBalancing.enabled` | if `true`, replicaCount may be >1, requires load balancing enabled on account | `false`
+`controller.replicaCount` | desired number of controller pods ([load-balancers][argo-tunnel-load-balancing] are required for values larger than 1). | `1`
+`loadBalancing.enabled` | if `true`, replicaCount may be >1, requires [load balancing][argo-tunnel-load-balancing] enabled on account | `false`
 `rbac.create` | if `true`, create & use RBAC resources | `true`
 `serviceAccount.create` | if `true`, create a service account | `true`
 `serviceAccount.name` | The name of the service account to use. If not set and `create` is `true`, a name is generated using the fullname template. | ``
 
 A useful trick to debug issues with ingress is to increase the logLevel.
 ```console
-$ helm install chart/ --set controller.logLevel=6
+$ helm install --name anydomain cloudflare/argo-tunnel --set controller.logLevel=6
 ```
 
+> **Warn**: replicaCount >1 requires [load-balancers][argo-tunnel-load-balancing]
+
 [argo-smart-routing]: https://www.cloudflare.com/products/argo-smart-routing/
+[argo-tunnel-load-balancing]: https://developers.cloudflare.com/argo-tunnel/reference/load-balancing/
 [argo-tunnel-reference]: https://developers.cloudflare.com/argo-tunnel/reference/
 [argo-tunnel-quick-start]: https://developers.cloudflare.com/argo-tunnel/quickstart/
 [argo-tunnel-ingress-quick-start]: https://github.com/cloudflare/cloudflare-ingress-controller/
