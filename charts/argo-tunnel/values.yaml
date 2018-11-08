@@ -11,7 +11,7 @@ controller:
   resources:
     limits:
       cpu: 100m
-      memory: 256M
+      memory: 256Mi
 # Enable load balancing
 # requires load balancing enabled on the cloudflare account.
 loadBalancing:
