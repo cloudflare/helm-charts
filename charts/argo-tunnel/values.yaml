@@ -3,11 +3,13 @@ controller:
   name: controller
   image:
     repository: gcr.io/cloudflare-registry/argo-tunnel
-    tag: "0.5.3"
+    tag: "0.6.0"
     pullPolicy: Always
   ingressClass: argo-tunnel
-  logLevel: 2
+  logLevel: 3
   replicaCount: 1
+  resyncPeriod: 5m
+  workers: 2
   resources:
     limits:
       cpu: 100m

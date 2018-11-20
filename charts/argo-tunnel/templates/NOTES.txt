@@ -4,16 +4,11 @@ The ingress controller requires domain credentials to create Argo Tunnels.
 Obtain the credentials for your cloudflare domain using the _cloudflared_ binary.
  - See https://developers.cloudflare.com/argo-tunnel/quickstart/
 
- Create and label the secret. The name of the secret does NOT matter.
- The secret MUST be labeled with the associated cloudflare domain.
+ Create a Tunnel secret. The name of the secret does NOT matter.
 
  kubectl -n={{ .Release.Namespace }} \
     create secret generic mydomain-tunnel-cert \
     --from-file=cert.pem="$HOME/.cloudflared/cert.pem"
-
-kubectl -n={{ .Release.Namespace }} \
-     label secret mydomain-tunnel-cert \
-     "cloudflare-argo/domain=mydomain.com"
 
 {{ if .Values.loadBalancing.enabled }}
 Load balancing has been enabled for the deployment.

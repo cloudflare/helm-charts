@@ -47,11 +47,13 @@ Parameter | Description | Default
 --- | --- | ---
 `controller.name` | name of the controller component | `controller`
 `controller.image.repository` | controller container image repository | `gcr.io/stackpoint-public/argot`
-`controller.image.tag` | controller container image tag | `0.5.3`
+`controller.image.tag` | controller container image tag | `0.6.0`
 `controller.image.pullPolicy` | controller container image pull policy | `Always`
 `controller.ingressClass` | name of the ingress class to route through this controller | `argo-tunnel`
-`controller.logLevel` | log-level for this controller | `2`
+`controller.logLevel` | log-level for this controller | `3`
 `controller.replicaCount` | desired number of controller pods ([load-balancers][argo-tunnel-load-balancing] are required for values larger than 1). | `1`
+`controller.resyncPeriod` | period between kubernetes resource synchronization | `5m`
+`controller.workers` | number of workers processing updates | `2`
 `loadBalancing.enabled` | if `true`, replicaCount may be >1, requires [load balancing][argo-tunnel-load-balancing] enabled on account | `false`
 `rbac.create` | if `true`, create & use RBAC resources | `true`
 `serviceAccount.create` | if `true`, create a service account | `true`
