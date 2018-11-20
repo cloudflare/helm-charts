@@ -34,16 +34,16 @@ spec:
       - name: {{ template "argo-tunnel.name" . }}-{{ .Values.controller.name }}
         image: "{{ .Values.controller.image.repository }}:{{ .Values.controller.image.tag }}"
         imagePullPolicy: "{{ .Values.controller.image.pullPolicy }}"
-        command: ["argot"]
+        ccommand: ["argot", "couple"]
         args:
-        - --v={{ .Values.controller.logLevel }}
+        - --incluster
         - --ingressClass={{ .Values.controller.ingressClass }}
-        - --namespace=$(POD_NAMESPACE)
-        env:
-        - name: POD_NAMESPACE
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.namespace
+        {{- if .Values.controller.defaultOriginSecret }}
+        - --default-origin-secret={{ .Values.controller.defaultOriginSecret }}
+        {{- end }}
+        - --resync-period={{ .Values.controller.resyncPeriod }}
+        - --workers={{ .Values.controller.workers }}
+        - --v={{ .Values.controller.logLevel }}
         {{- if .Values.controller.resources }}
         resources:
 {{ toYaml .Values.controller.resources | trim | indent 10 }}
