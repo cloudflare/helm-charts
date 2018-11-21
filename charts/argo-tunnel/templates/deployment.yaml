@@ -34,7 +34,7 @@ spec:
       - name: {{ template "argo-tunnel.name" . }}-{{ .Values.controller.name }}
         image: "{{ .Values.controller.image.repository }}:{{ .Values.controller.image.tag }}"
         imagePullPolicy: "{{ .Values.controller.image.pullPolicy }}"
-        ccommand: ["argot", "couple"]
+        command: ["argot", "couple"]
         args:
         - --incluster
         - --ingressClass={{ .Values.controller.ingressClass }}
