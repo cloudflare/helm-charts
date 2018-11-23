@@ -37,7 +37,7 @@ spec:
         command: ["argot", "couple"]
         args:
         - --incluster
-        - --ingressClass={{ .Values.controller.ingressClass }}
+        - --ingress-class={{ .Values.controller.ingressClass }}
         {{- if .Values.controller.defaultOriginSecret }}
         - --default-origin-secret={{ .Values.controller.defaultOriginSecret }}
         {{- end }}
