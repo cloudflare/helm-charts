@@ -2,9 +2,9 @@ apiVersion: v1
 entries:
   argo-tunnel:
   - apiVersion: v1
-    created: 2018-11-23T16:02:23.691082278Z
+    created: 2018-11-29T22:54:50.836141774Z
     description: Installs the cloudflare argo tunnel ingress controller
-    digest: e339e6d5b973f865d8e36bb1434574c73ddc54ee3687d770f3bf857dbb183284
+    digest: ad93b08a58b083df16a7def57b61c25f4494c32af419033e5354bfd93c76d6ae
     home: https://developers.cloudflare.com/argo-tunnel/
     maintainers:
     - email: nate@stackpointcloud.com
@@ -14,7 +14,7 @@ entries:
     - argo-tunnel/argo-tunnel-0.6.0.tgz
     version: 0.6.0
   - apiVersion: v1
-    created: 2018-11-23T16:02:23.690687813Z
+    created: 2018-11-29T22:54:50.835814068Z
     description: Installs the cloudflare argo tunnel ingress controller
     digest: c94070aeefbe3ed5ce3853fb2a190c9ac512942826a09e7f917d978f7dc84d7b
     home: https://developers.cloudflare.com/argo-tunnel/
@@ -25,4 +25,4 @@ entries:
     urls:
     - argo-tunnel/argo-tunnel-0.5.3.tgz
     version: 0.5.3
-generated: 2018-11-23T16:02:23.690081175Z
+generated: 2018-11-29T22:54:50.835356825Z
