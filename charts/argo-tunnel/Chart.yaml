@@ -4,5 +4,5 @@ version: 0.6.1
 home: https://developers.cloudflare.com/argo-tunnel/
 description: Installs the cloudflare argo tunnel ingress controller
 maintainers:
-  - name: Nathan Franzen
-    email: nate@stackpointcloud.com
+  - name: Matthew Alberts
+    email: malberts@cloudflare.com
