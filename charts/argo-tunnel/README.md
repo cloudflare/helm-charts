@@ -46,6 +46,7 @@ The following table lists the configurable parameters of the chart and their def
 Parameter | Description | Default
 --- | --- | ---
 `controller.name` | name of the controller component | `controller`
+`controller.defaultOriginSecret` | default origin tunnel certificate secret `<namespace>/<name>` | `""`
 `controller.image.repository` | controller container image repository | `gcr.io/stackpoint-public/argot`
 `controller.image.tag` | controller container image tag | `0.6.0`
 `controller.image.pullPolicy` | controller container image pull policy | `Always`
@@ -53,9 +54,13 @@ Parameter | Description | Default
 `controller.logLevel` | log-level for this controller | `3`
 `controller.replicaCount` | desired number of controller pods ([load-balancers][argo-tunnel-load-balancing] are required for values larger than 1). | `1`
 `controller.resyncPeriod` | period between kubernetes resource synchronization | `5m`
+`controller.watchNamespace` | restrict resource watches to a single namespace | `""`
 `controller.workers` | number of workers processing updates | `2`
 `loadBalancing.enabled` | if `true`, replicaCount may be >1, requires [load balancing][argo-tunnel-load-balancing] enabled on account | `false`
 `rbac.create` | if `true`, create & use RBAC resources | `true`
+`rbac.name` | The name of the role binding to use. If not set and `create` is `true`, a name is generated using the fullname template. | ``
+`secretMapping.create` | if `true`, create a secret mapping config map | `true`
+`secretMapping.content` | The secret mapping config map YAML content. | `{}`
 `serviceAccount.create` | if `true`, create a service account | `true`
 `serviceAccount.name` | The name of the service account to use. If not set and `create` is `true`, a name is generated using the fullname template. | ``
 
