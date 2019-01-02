@@ -41,7 +41,13 @@ spec:
         {{- if .Values.controller.defaultOriginSecret }}
         - --default-origin-secret={{ .Values.controller.defaultOriginSecret }}
         {{- end }}
+        {{- if .Values.secretMapping.create }}
+        - --origin-secret-config=/etc/argo/secret-mapping.yaml
+        {{- end }}
         - --resync-period={{ .Values.controller.resyncPeriod }}
+        {{- if .Values.controller.watchNamespace }}
+        - --watch-namespace={{ .Values.controller.watchNamespace }}
+        {{- end }}
         - --workers={{ .Values.controller.workers }}
         - --v={{ .Values.controller.logLevel }}
         {{- if .Values.controller.resources }}
@@ -50,6 +56,12 @@ spec:
         {{- end }}
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
+        {{- if .Values.secretMapping.create }}
+        volumeMounts:
+        - mountPath: /etc/argo
+          name: {{ template "argo-tunnel.fullname" . }}
+          readOnly: true
+        {{- end }}
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
@@ -58,6 +70,12 @@ spec:
       serviceAccountName: {{ template "argo-tunnel.serviceAccountName" . }}
       {{- end }}
       terminationGracePeriodSeconds: 30
+      {{- if .Values.secretMapping.create }}
+      volumes:
+      - name: {{ template "argo-tunnel.fullname" . }}
+        configMap:
+          name: {{ template "argo-tunnel.fullname" . }}
+      {{- end }}
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
