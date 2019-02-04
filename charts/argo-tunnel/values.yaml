@@ -8,8 +8,6 @@ controller:
   ingressClass: argo-tunnel
   logLevel: 3
   replicaCount: 1
-  resyncPeriod: 5m
-  workers: 2
   resources:
     limits:
       cpu: 100m

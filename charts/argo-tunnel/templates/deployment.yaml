@@ -44,11 +44,27 @@ spec:
         {{- if .Values.secretMapping.create }}
         - --origin-secret-config=/etc/argo/secret-mapping.yaml
         {{- end }}
+        {{- if .Values.controller.repairDelay }}
+        - --repair-delay={{ .Values.controller.repairDelay }}
+        {{- end }}
+        {{- if .Values.controller.repairJitter }}
+        - --repair-jitter={{ .Values.controller.repairJitter }}
+        {{- end }}
+        {{- if .Values.controller.resyncPeriod }}
         - --resync-period={{ .Values.controller.resyncPeriod }}
+        {{- end }}
+        {{- if .Values.controller.tagLimit }}
+        - --tag-limit={{ .Values.controller.tagLimit }}
+        {{- end }}
+        {{- if .Values.controller.transportLogEnable }}
+        - --transport-log-enable
+        {{- end }}
         {{- if .Values.controller.watchNamespace }}
         - --watch-namespace={{ .Values.controller.watchNamespace }}
         {{- end }}
+        {{- if .Values.controller.workers }}
         - --workers={{ .Values.controller.workers }}
+        {{- end }}
         - --v={{ .Values.controller.logLevel }}
         {{- if .Values.controller.resources }}
         resources:
