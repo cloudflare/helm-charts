@@ -31,3 +31,10 @@ secretMapping:
   create: false
   content:
     {}
+
+# Enable metrics
+metrics:
+  enabled: false
+  servicemonitor:
+    label: metrics
+    value: enabled

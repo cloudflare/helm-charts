@@ -34,6 +34,12 @@ spec:
       - name: {{ template "argo-tunnel.name" . }}-{{ .Values.controller.name }}
         image: "{{ .Values.controller.image.repository }}:{{ .Values.controller.image.tag }}"
         imagePullPolicy: "{{ .Values.controller.image.pullPolicy }}"
+        {{- if .Values.metrics.enabled }}
+        ports:
+        - containerPort: 8080
+          name: metrics
+          protocol: TCP
+        {{- end }}
         command: ["argot", "couple"]
         args:
         - --incluster
@@ -64,6 +70,9 @@ spec:
         {{- end }}
         {{- if .Values.controller.workers }}
         - --workers={{ .Values.controller.workers }}
+        {{- end }}
+        {{- if .Values.metrics.enabled }}
+        - --metrics-enable
         {{- end }}
         - --v={{ .Values.controller.logLevel }}
         {{- if .Values.controller.resources }}
