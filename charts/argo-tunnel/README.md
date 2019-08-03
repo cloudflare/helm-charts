@@ -47,8 +47,8 @@ Parameter | Description | Default
 --- | --- | ---
 `controller.name` | name of the controller component | `controller`
 `controller.defaultOriginSecret` | default origin tunnel certificate secret `<namespace>/<name>` | `""`
-`controller.image.repository` | controller container image repository | `gcr.io/stackpoint-public/argot`
-`controller.image.tag` | controller container image tag | `0.6.0`
+`controller.image.repository` | controller container image repository | `gcr.io/cloudflare-registry/argo-tunnel`
+`controller.image.tag` | controller container image tag | `0.6.5`
 `controller.image.pullPolicy` | controller container image pull policy | `Always`
 `controller.ingressClass` | name of the ingress class to route through this controller | `argo-tunnel`
 `controller.logLevel` | log-level for this controller | `3`
