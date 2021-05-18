@@ -6,6 +6,8 @@ $ helm install --name anydomain cloudflare/argo-tunnel
 ```
 > **Tip**: See [Your First Tunnel][guide-first-tunnel].
 
+**Warning**: This project is no longer actively maintained.
+
 ### About
 Argo Tunnel Ingress Controller provides Kubernetes Ingress via Argo Tunnels.
 The controller establishes or destroys tunnels by monitoring changes to resources.
