@@ -1,5 +1,6 @@
 # Default values for cloudflare argo-tunnel ingress.
 controller:
+  apiVersion: apps/v1
   name: controller
   image:
     repository: gcr.io/cloudflare-registry/argo-tunnel
