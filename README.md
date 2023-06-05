@@ -13,3 +13,7 @@ helm repo update
 ```bash
 helm search cloudflare
 ```
+
+### Contents
+- `charts/argo-tunnel`: (Deprecated) the former ingress based helm chart
+- `charts/cloudflare-tunnel`: Helm 3 chart using cloudflared best practices
