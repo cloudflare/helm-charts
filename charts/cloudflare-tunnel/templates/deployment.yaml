@@ -67,7 +67,7 @@ spec:
       volumes:
         - name: creds
           secret:
-            secretName: {{ include "cloudflare-tunnel.fullname" . }}
+            secretName: {{ .Values.cloudflare.secretName | default (include "cloudflare-tunnel.fullname" .) }}
         - name: config
           configMap:
             name: {{ include "cloudflare-tunnel.fullname" . }}
