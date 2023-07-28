@@ -11,7 +11,7 @@ helm repo update
 
 ### Discovery
 ```bash
-helm search cloudflare
+helm search repo cloudflare
 ```
 
 ### Contents
