@@ -48,10 +48,14 @@ spec:
               # Cloudflared has a /ready endpoint which returns 200 if and only if
               # it has an active connection to the edge.
               path: /ready
-              port: 2000
+              port: {{ .Values.metrics.port }}
             failureThreshold: 1
             initialDelaySeconds: 10
             periodSeconds: 10
+          ports:
+          - containerPort: {{ .Values.metrics.port }}
+            name: metrics
+            protocol: TCP
           volumeMounts:
             - name: config
               mountPath: /etc/cloudflared/config

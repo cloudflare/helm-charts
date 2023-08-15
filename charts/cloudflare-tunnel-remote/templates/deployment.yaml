@@ -8,7 +8,7 @@ spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      pod: cloudflared
+      {{- include "cloudflare-tunnel-remote.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       creationTimestamp: null
@@ -16,10 +16,13 @@ spec:
         # These are here so the deployment rolls when the config or secret change.
         checksum/secret: {{ .Values.cloudflare.tunnel_token | sha256sum }}
         {{- with .Values.podAnnotations }}
-        {{- toYaml . | nindent 8 }}
+          {{- toYaml . | nindent 8 }}
         {{- end }}
       labels:
-        pod: cloudflared
+        {{- include "cloudflare-tunnel-remote.selectorLabels" . | nindent 8 }}
+      {{- with .Values.podLabels }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
     spec:
       serviceAccountName: {{ include "cloudflare-tunnel-remote.fullname" . }}
       containers:
@@ -32,7 +35,7 @@ spec:
           # In a k8s environment, the metrics server needs to listen outside the pod it runs on. 
           # The address 0.0.0.0:2000 allows any pod in the namespace.
           - --metrics
-          - 0.0.0.0:2000
+          - 0.0.0.0:{{ .Values.metrics.port }}
           - run
         envFrom:
         - secretRef:
@@ -43,7 +46,11 @@ spec:
             # Cloudflared has a /ready endpoint which returns 200 if and only if
             # it has an active connection to the edge.
             path: /ready
-            port: 2000
+            port: {{ .Values.metrics.port }}
           failureThreshold: 1
           initialDelaySeconds: 10
           periodSeconds: 10
+        ports:
+        - containerPort: {{ .Values.metrics.port }}
+          name: metrics
+          protocol: TCP

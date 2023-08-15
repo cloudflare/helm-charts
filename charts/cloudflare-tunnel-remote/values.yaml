@@ -24,6 +24,8 @@ serviceAccount:
   name: ""
 
 podAnnotations: {}
+podLabels:
+  pod: cloudflared
 
 # Security items common to everything in the pod.  Here we require that it
 # does not run as the user defined in the image, literally named "nonroot".
@@ -57,3 +59,18 @@ tolerations: []
 
 # Default affinity is to spread out over nodes; use this to override.
 affinity: {}
+
+metrics:
+  # The port on which to expose the metrics and ready endpoints
+  port: 2000
+  service:
+    # Additional annotations for the metrics service
+    annotations: {}
+  serviceMonitor:
+    enabled: false
+    # Endpoint configuration for the ServiceMonitor
+    endpointConfig: {}
+    # Additional annotations for the ServiceMonitor
+    annotations: {}
+    # Additional labels for the ServiceMonitor
+    labels: {}
