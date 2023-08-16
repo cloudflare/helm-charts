@@ -3,7 +3,7 @@
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: {{ include "cloudflare-tunnel-remote.fullname" . }
+  name: {{ include "cloudflare-tunnel-remote.fullname" . }}
   {{- with .Values.metrics.serviceMonitor.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
