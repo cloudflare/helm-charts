@@ -54,8 +54,7 @@ spec:
             periodSeconds: 10
           ports:
           - containerPort: {{ .Values.metrics.port }}
-            name: metrics
-            protocol: TCP
+            name: http-metrics
           volumeMounts:
             - name: config
               mountPath: /etc/cloudflared/config

@@ -52,5 +52,4 @@ spec:
           periodSeconds: 10
         ports:
         - containerPort: {{ .Values.metrics.port }}
-          name: metrics
-          protocol: TCP
+          name: http-metrics

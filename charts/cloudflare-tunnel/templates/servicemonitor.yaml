@@ -21,7 +21,7 @@ spec:
     matchLabels:
       {{- include "cloudflare-tunnel.selectorLabels" . | nindent 6 }}
   endpoints:
-    - port: metrics
+    - port: http-metrics
       path: /metrics
     {{- with .Values.metrics.serviceMonitor.endpointConfig }}
       {{- toYaml . | nindent 6 }}
