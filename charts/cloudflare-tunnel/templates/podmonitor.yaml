@@ -1,29 +1,33 @@
-
-{{- if .Values.metrics.serviceMonitor.enabled }}
+{{- if .Values.metrics.podMonitor.enabled }}
 apiVersion: monitoring.coreos.com/v1
-kind: ServiceMonitor
+kind: PodMonitor
 metadata:
   name: {{ include "cloudflare-tunnel.fullname" . }}
-  {{- with .Values.metrics.serviceMonitor.annotations }}
+  {{- with .Values.metrics.podMonitor.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
   {{- end }}
   labels:
     {{- include "cloudflare-tunnel.labels" . | nindent 4 }}
-  {{- with .Values.metrics.serviceMonitor.labels }}
+  {{- with .Values.metrics.podMonitor.labels }}
     {{- toYaml . | nindent 4 }}
   {{- end }}
 spec:
+  jobLabel: {{ default "app.kubernetes.io/name" .Values.metrics.podMonitor.jobLabel }}
   namespaceSelector:
     matchNames:
       - {{ .Release.Namespace }}
   selector:
     matchLabels:
       {{- include "cloudflare-tunnel.selectorLabels" . | nindent 6 }}
-  endpoints:
+  {{- with .Values.metrics.podMonitor.podTargetLabels }}
+  podTargetLabels:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  podMetricsEndpoints:
     - port: http-metrics
       path: /metrics
-    {{- with .Values.metrics.serviceMonitor.endpointConfig }}
+    {{- with .Values.metrics.podMonitor.endpointConfig }}
       {{- toYaml . | nindent 6 }}
     {{- end }}
 {{- end }}

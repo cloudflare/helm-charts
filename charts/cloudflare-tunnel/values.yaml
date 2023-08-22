@@ -83,14 +83,15 @@ affinity: {}
 metrics:
   # The port on which to expose the metrics and ready endpoints
   port: 2000
-  service:
-    # Additional annotations for the metrics service
-    annotations: {}
-  serviceMonitor:
+  podMonitor:
     enabled: false
-    # Endpoint configuration for the ServiceMonitor
+    # The label to use to retrieve the job name from. Defaults to label app.kubernetes.io/name
+    jobLabel: ""
+    # Transfers labels on the Kubernetes Pod onto the target
+    podTargetLabels: []
+    # Additional metrics endpoints configuration for the PodMonitor
     endpointConfig: {}
-    # Additional annotations for the ServiceMonitor
+    # Additional annotations for the PodMonitor
     annotations: {}
-    # Additional labels for the ServiceMonitor
+    # Additional labels for the PodMonitor
     labels: {}
