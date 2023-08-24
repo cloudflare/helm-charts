@@ -33,6 +33,9 @@ spec:
           # The address 0.0.0.0:2000 allows any pod in the namespace.
           - --metrics
           - 0.0.0.0:2000
+          # Do not autoupdate as it will keep the pod in a crash loop due to the process being
+          # killed post-update
+          - --no-autoupdate
           - run
         envFrom:
         - secretRef:
