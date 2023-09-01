@@ -10,6 +10,9 @@ image:
   # If supplied, this overrides "latest"
   tag: ""
 
+extraArgs:
+  - --no-autoupdate
+
 replicaCount: 2
 
 imagePullSecrets: []
