@@ -79,3 +79,19 @@ tolerations: []
 
 # Default affinity is to spread out over nodes; use this to override.
 affinity: {}
+
+metrics:
+  # The port on which to expose the metrics and ready endpoints
+  port: 2000
+  podMonitor:
+    enabled: false
+    # The label to use to retrieve the job name from. Defaults to label app.kubernetes.io/name
+    jobLabel: ""
+    # Transfers labels on the Kubernetes Pod onto the target
+    podTargetLabels: []
+    # Additional metrics endpoints configuration for the PodMonitor
+    endpointConfig: {}
+    # Additional annotations for the PodMonitor
+    annotations: {}
+    # Additional labels for the PodMonitor
+    labels: {}
