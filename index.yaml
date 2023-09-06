@@ -37,6 +37,18 @@ entries:
   cloudflare-tunnel-remote:
   - apiVersion: v2
     appVersion: latest
+    created: "2023-09-06T19:42:58.167073455Z"
+    description: Deployment of a remotely managed tunnel that has already been provisioned
+      in Cloudflare
+    digest: 753285133e9f1815473a3d2aa5f5627fc81a83813edb4d35b16e6feeb86be241
+    icon: https://developers.cloudflare.com/cloudflare-one/favicon-32x32.png
+    name: cloudflare-tunnel-remote
+    type: application
+    urls:
+    - https://github.com/cloudflare/helm-charts/releases/download/cloudflare-tunnel-remote-0.1.1/cloudflare-tunnel-remote-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: latest
     created: "2023-08-01T22:31:33.460092249Z"
     description: Deployment of a remotely managed tunnel that has already been provisioned
       in Cloudflare
@@ -47,4 +59,4 @@ entries:
     urls:
     - https://github.com/cloudflare/helm-charts/releases/download/cloudflare-tunnel-remote-0.1.0/cloudflare-tunnel-remote-0.1.0.tgz
     version: 0.1.0
-generated: "2023-08-01T22:31:33.460103249Z"
+generated: "2023-09-06T19:42:58.167092555Z"
