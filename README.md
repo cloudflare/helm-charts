@@ -16,4 +16,5 @@ helm search repo cloudflare
 
 ### Contents
 
-- `charts/cloudflare-tunnel`: Helm 3 chart using cloudflared best practices
+- `charts/cloudflare-tunnel`: Helm 3 chart for creating local cloudflared tunnels
+- `charts/cloudflare-tunnel-remote`: Helm 3 chart for deploying remotely managed cloudflared tunnels that have already been provisioned in Cloudflare
