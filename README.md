@@ -18,6 +18,22 @@ helm search repo cloudflare
 
 #### Cloudflare Tunnel
 
+> [!NOTE]
+> To get the cloudflare tunnel secret you need to decrypt your cloudflare tunnel token.
+>
+> ```bash
+> echo "ey..." | base64 -d
+> ```
+> 
+> The decoded token should be a JSON object like 
+> 
+> ```json
+> {"a": "<account-id>", "t": "<tunnel-id>", "s": "<tunnel-secret>"}
+> ```
+> 
+> Remember the value of the tunnel-secret!
+
+
 If you are using the Cloudflare Tunnel without an existing secret you have to set the following values:
 
 ```yaml
@@ -25,7 +41,7 @@ cloudflare:
   account: <your-cloudflare-account-id>
   tunnelName: <your-cloudflare-tunnel-name>
   tunnelId: <your-cloudflare-tunnel-id>
-  secret: <your-cloudflare-tunnel-token>
+  secret: <your-cloudflare-tunnel-secret>
 ```
 
 If you are using the Cloudflare Tunnel with an existing secret you have to set the following values:
