@@ -26,7 +26,6 @@ cloudflare:
   tunnelName: <your-cloudflare-tunnel-name>
   tunnelId: <your-cloudflare-tunnel-id>
   secret: <your-cloudflare-tunnel-token>
-  ingress: []
 ```
 
 If you are using the Cloudflare Tunnel with an existing secret you have to set the following values:
@@ -35,7 +34,6 @@ If you are using the Cloudflare Tunnel with an existing secret you have to set t
 cloudflare:
   tunnelName: <your-cloudflare-tunnel-name>
   secretName: <your-existing-cloudflare-tunnel-secret> # It must be created in the namespace that your are deploying your cloudflare-tunnel in.
-  ingress: []
 ```
 
 #### Cloudflare Tunnel Remote
