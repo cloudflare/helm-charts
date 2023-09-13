@@ -14,6 +14,34 @@ helm repo update
 helm search repo cloudflare
 ```
 
+### Usage
+
+#### Cloudflare Tunnel
+
+If you are using the Cloudflare Tunnel without an existing secret you have to set the following values:
+
+```yaml
+cloudflare:
+  account: <your-cloudflare-account-id>
+  tunnelName: <your-cloudflare-tunnel-name>
+  tunnelId: <your-cloudflare-tunnel-id>
+  secret: <your-cloudflare-tunnel-token>
+  ingress: []
+```
+
+If you are using the Cloudflare Tunnel with an existing secret you have to set the following values:
+
+```yaml
+cloudflare:
+  tunnelName: <your-cloudflare-tunnel-name>
+  secretName: <your-existing-cloudflare-tunnel-secret> # It must be created in the namespace that your are deploying your cloudflare-tunnel in.
+  ingress: []
+```
+
+#### Cloudflare Tunnel Remote
+
+Docs are coming soon...
+
 ### Contents
 
 - `charts/cloudflare-tunnel`: Helm 3 chart using cloudflared best practices
