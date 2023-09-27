@@ -79,3 +79,18 @@ tolerations: []
 
 # Default affinity is to spread out over nodes; use this to override.
 affinity: {}
+
+serviceMonitor:
+  # -- Enable this if you're using https://github.com/coreos/prometheus-operator
+  enabled: false
+  # -- Interval at which endpoints should be scraped.
+  interval: 30s
+  # -- Add custom labels to the ServiceMonitor resource
+  additionalLabels: {}
+    # prometheus: kube-prometheus
+  # -- Chooses the metric’s labels on collisions with target labels.
+  honorLabels: false
+  # -- Path to scrape metrics
+  path: /metrics
+  # -- Timeout for scrape metrics request
+  scrapeTimeout: 10s
