@@ -29,10 +29,10 @@ spec:
     {{- if .Values.serviceMonitor.honorLabels }}
     honorLabels: true
     {{- end }}
-    selector:
-      matchLabels:
-        {{- include "cloudflare-tunnel.selectorLabels" . | nindent 6 }}
-    namespaceSelector:
-      matchNames:
-      - {{ .Release.Namespace }}
+  selector:
+    matchLabels:
+      {{- include "cloudflare-tunnel.selectorLabels" . | nindent 6 }}
+  namespaceSelector:
+    matchNames:
+    - {{ .Release.Namespace }}
 {{- end }}
