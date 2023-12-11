@@ -40,7 +40,7 @@ spec:
         - name: TUNNEL_TOKEN
           valueFrom:
             secretKeyRef:
-              secretName: {{ .Values.cloudflare.secretName | default (include "cloudflare-tunnel-remote.fullname" .) }}
+              name: {{ .Values.cloudflare.secretName | default (include "cloudflare-tunnel-remote.fullname" .) }}
               key: {{ .Values.cloudflare.secretKey | default "tunnelToken" }}
         livenessProbe:
           httpGet:
