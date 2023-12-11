@@ -3,6 +3,10 @@
 # Cloudflare parameters.
 cloudflare:
   tunnel_token: ""
+  # If defined, no secret is created for the credentials, and instead, the secret referenced is used
+  secretName: null
+  # the key of the secret where the token is stored
+  secretKey: "tunnelToken"
 
 image:
   repository: cloudflare/cloudflared
