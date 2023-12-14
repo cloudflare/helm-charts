@@ -12,6 +12,9 @@ cloudflare:
   secret: ""
   # If defined, no secret is created for the credentials, and instead, the secret referenced is used
   secretName: null
+  # Specifies the protocol used to establish a connection between cloudflared and the Cloudflare global network. Available values are auto, http2, h2mux, and quic. (default: auto)
+  # https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/install-and-setup/tunnel-guide/local/local-management/arguments/
+  protocol: ""
   # If true, turn on WARP routing for TCP
   enableWarp: false
   # Define ingress rules for the tunnel. See
