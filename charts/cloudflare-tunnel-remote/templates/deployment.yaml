@@ -40,8 +40,8 @@ spec:
         - name: TUNNEL_TOKEN
           valueFrom:
             secretKeyRef:
-              name: {{ include "cloudflare-tunnel-remote.fullname" . }}
-              key: tunnelToken
+              name: {{ .Values.cloudflare.secretName | default (include "cloudflare-tunnel-remote.fullname" .) }}
+              key: {{ .Values.cloudflare.secretKey | default "tunnelToken" }}
         livenessProbe:
           httpGet:
             # Cloudflared has a /ready endpoint which returns 200 if and only if
