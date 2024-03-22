@@ -25,6 +25,8 @@ cloudflare:
     # in the connection from cloudflared to your local service, not from the internet to cloudflared.
     # - hostname: hello.example.com
     #   service: hello_world
+  # If true, enable the default 404 page. Needs to be false if you want to use a '*' wildcard rule.
+  enableDefault404: true
 
 image:
   repository: cloudflare/cloudflared
@@ -58,7 +60,7 @@ securityContext:
   allowPrivilegeEscalation: false
   capabilities:
     drop:
-    - ALL
+      - ALL
   readOnlyRootFilesystem: true
 
 resources: {}
