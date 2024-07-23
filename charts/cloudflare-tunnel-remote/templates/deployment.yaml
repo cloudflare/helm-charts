@@ -20,6 +20,9 @@ spec:
         {{- end }}
       labels:
         pod: cloudflared
+        {{- with .Values.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
     spec:
       serviceAccountName: {{ include "cloudflare-tunnel-remote.fullname" . }}
       containers:
