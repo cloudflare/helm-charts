@@ -25,5 +25,3 @@ data:
       {{- with .Values.cloudflare.ingress }}
       {{- toYaml . | nindent 6 }}
       {{- end }}
-      # This rule matches any traffic which didn't match a previous rule, and responds with HTTP 404.
-      - service: http_status:404
