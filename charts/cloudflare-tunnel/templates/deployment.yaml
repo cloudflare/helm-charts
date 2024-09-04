@@ -22,6 +22,9 @@ spec:
         {{- end }}
       labels:
         {{- include "cloudflare-tunnel.selectorLabels" . | nindent 8 }}
+        {{- with .Values.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:

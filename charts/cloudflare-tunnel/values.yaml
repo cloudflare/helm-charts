@@ -46,6 +46,7 @@ serviceAccount:
   name: ""
 
 podAnnotations: {}
+podLabels: {}
 
 # Security items common to everything in the pod.  Here we require that it
 # does not run as the user defined in the image, literally named "nonroot".
