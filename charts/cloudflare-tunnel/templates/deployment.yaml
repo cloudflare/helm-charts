@@ -52,7 +52,7 @@ spec:
               # it has an active connection to the edge.
               path: /ready
               port: 2000
-            failureThreshold: 1
+            failureThreshold: {{ .Values.livenessProbe.failureThreshold }}
             initialDelaySeconds: 10
             periodSeconds: 10
           volumeMounts:
