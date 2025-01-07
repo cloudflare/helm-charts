@@ -34,6 +34,9 @@ image:
 
 replicaCount: 2
 
+# If true will run a daemonset, replicaCount is then ignored
+daemonset: false
+
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""

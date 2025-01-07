@@ -1,13 +1,19 @@
 # Here we deploy cloudflared images. The tunnel credentials are stored in
 # a k8s secret, and the configuration is stored in a k8s configmap.
 apiVersion: apps/v1
+{{- if .Values.daemonset -}}
+kind: Daemonset
+{{- else }}
 kind: Deployment
+{{- end }}
 metadata:
   name: {{ include "cloudflare-tunnel.fullname" . }}
   labels:
     {{- include "cloudflare-tunnel.labels" . | nindent 4 }}
 spec:
+  {{- if .Values.daemonset -}}{{- else }}
   replicas: {{ .Values.replicaCount }}
+  {{- end }}
   selector:
     matchLabels:
       {{- include "cloudflare-tunnel.selectorLabels" . | nindent 6 }}
