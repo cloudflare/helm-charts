@@ -77,6 +77,10 @@ spec:
             items:
               - key: config.yaml
                 path: config.yaml
+      {{- with .Values.priorityClassName }}
+      priorityClassName:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
