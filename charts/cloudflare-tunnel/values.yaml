@@ -26,6 +26,9 @@ cloudflare:
     # - hostname: hello.example.com
     #   service: hello_world
 
+# https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/configure-tunnels/cloudflared-parameters/run-parameters/#loglevel
+logLevel: info
+
 image:
   repository: cloudflare/cloudflared
   pullPolicy: IfNotPresent
