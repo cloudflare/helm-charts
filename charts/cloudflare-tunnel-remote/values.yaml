@@ -31,6 +31,9 @@ podLabels: {}
 podSecurityContext:
   runAsNonRoot: true
   runAsUser: 65532
+  sysctls:
+    - name: net.ipv4.ping_group_range
+      value: "65532 65532"
 
 # Security items for one container. We lock it down.
 securityContext:

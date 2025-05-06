@@ -25,10 +25,14 @@ spec:
         {{- end }}
     spec:
       serviceAccountName: {{ include "cloudflare-tunnel-remote.fullname" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
       - name: cloudflared
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default "latest" }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
+        securityContext:
+          {{- toYaml .Values.securityContext | nindent 12 }}
         command:
           - cloudflared
           - tunnel
