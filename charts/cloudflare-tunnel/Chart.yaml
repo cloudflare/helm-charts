@@ -18,5 +18,5 @@ version: 0.4.1
 # It is recommended to use it with quotes.
 appVersion: "2024.11.1"
 
-# Let's look professional with a Cloudflare icon.
+# Let's look professional with a Cloudflare icon. 
 icon: https://developers.cloudflare.com/cloudflare-one/favicon-32x32.png
