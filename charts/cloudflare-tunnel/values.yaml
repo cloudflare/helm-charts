@@ -110,3 +110,14 @@ serviceMonitor:
   path: /metrics
   # -- Timeout for scrape metrics request
   scrapeTimeout: 10s
+
+# Pod Disruption Budget configuration
+podDisruptionBudget:
+  # -- Enable Pod Disruption Budget
+  enabled: true
+  # -- Minimum number of pods that must be available during disruptions
+  # This ensures at least 1 pod is always running
+  minAvailable: 1
+  # -- Maximum number of pods that can be unavailable during disruptions
+  # This is mutually exclusive with minAvailable
+  maxUnavailable: null
