@@ -37,6 +37,12 @@ image:
 
 replicaCount: 2
 
+# Termination grace period for the pod (in seconds)
+terminationGracePeriodSeconds: 75
+
+# Grace period for cloudflared tunnel shutdown (in seconds)
+gracePeriod: 60
+
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
