@@ -41,7 +41,7 @@ replicaCount: 2
 terminationGracePeriodSeconds: 75
 
 # Grace period for cloudflared tunnel shutdown (in seconds)
-gracePeriod: 60
+gracePeriod: 60s
 
 imagePullSecrets: []
 nameOverride: ""
