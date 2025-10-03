@@ -47,7 +47,7 @@ spec:
             - --config
             - /etc/cloudflared/config/config.yaml
             - --grace-period
-            - {{ .Values.gracePeriod }}
+            - "{{ .Values.gracePeriod }}"
             - run
           livenessProbe:
             httpGet:
