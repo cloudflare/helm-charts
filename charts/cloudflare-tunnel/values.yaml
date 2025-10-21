@@ -10,6 +10,8 @@ cloudflare:
   tunnelId: ""
   # The secret for the tunnel.
   secret: ""
+  # The protocol to use for the tunnel.  This is usually "auto" or "quic".
+  protocol: "auto"
   # If defined, no secret is created for the credentials, and instead, the secret referenced is used
   secretName: null
   # If true, turn on WARP routing for TCP
