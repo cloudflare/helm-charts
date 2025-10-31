@@ -1,0 +1,32 @@
+# Example: Quick Start with Remote-Managed Tunnel
+#
+# Prerequisites:
+# 1. Create tunnel in Dashboard (https://one.dash.cloudflare.com)
+# 2. Copy tunnel token from installation command
+# 3. Store token securely (e.g., CI/CD secrets, vault)
+#
+# Usage:
+#   export TUNNEL_TOKEN="your-token-from-dashboard"
+#   helm install my-tunnel cloudflare/cloudflare-tunnel-remote \
+#     -n cloudflare --create-namespace \
+#     --set cloudflare.tunnel_token="$TUNNEL_TOKEN"
+#
+# After installation:
+# - Configure routes in Dashboard: Networks → Tunnels → Public Hostname
+#
+# Note: DO NOT commit this file with real token to Git!
+
+replicaCount: 2
+
+cloudflare:
+  # Replace with your token from Dashboard
+  # For production, use --set or external secrets instead
+  tunnel_token: "REPLACE_WITH_YOUR_TOKEN"
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 50m
+    memory: 64Mi
