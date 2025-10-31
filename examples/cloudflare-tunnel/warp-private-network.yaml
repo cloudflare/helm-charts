@@ -1,0 +1,49 @@
+# Example: Private Network Access via WARP-to-Tunnel
+#
+# Use case: Enable secure access to internal services for remote users
+# Users connect via Cloudflare WARP client to access private resources
+#
+# Prerequisites:
+# 1. Create tunnel: cloudflared tunnel create internal-access
+# 2. Create secret with credentials
+# 3. Configure Access policies in Zero Trust Dashboard
+# 4. Install WARP client on user devices
+#
+# Usage:
+#   helm install internal-tunnel cloudflare/cloudflare-tunnel \
+#     -n cloudflare --create-namespace -f warp-private-network.yaml
+
+replicaCount: 3
+
+cloudflare:
+  tunnelName: "internal-access"
+  secretName: "tunnel-creds"
+  
+  # Enable WARP routing for private network access
+  enableWarp: true
+  
+  # Internal services accessible via WARP
+  ingress:
+    - service: http://internal-dashboard.default.svc.cluster.local:80
+    - service: http://api.internal.svc.cluster.local:8080
+    - service: http://jenkins.ci.svc.cluster.local:8080
+
+# Higher resources for internal access
+resources:
+  limits:
+    cpu: 200m
+    memory: 256Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+# Spread pods across nodes for HA
+affinity:
+  podAntiAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        podAffinityTerm:
+          topologyKey: kubernetes.io/hostname
+          labelSelector:
+            matchLabels:
+              app.kubernetes.io/name: cloudflare-tunnel

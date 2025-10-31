@@ -1,0 +1,35 @@
+# Example: Basic Web Application with Existing Secret
+#
+# Prerequisites:
+# 1. Create tunnel: cloudflared tunnel create my-k8s-tunnel
+# 2. Create secret: kubectl create secret generic tunnel-creds \
+#      --from-file=credentials.json=$HOME/.cloudflared/<TUNNEL_ID>.json -n cloudflare
+# 3. Deploy app: kubectl create deployment nginx --image=nginx -n default
+# 4. Expose app: kubectl expose deployment nginx --port=80 -n default
+#
+# Usage:
+#   helm install my-tunnel cloudflare/cloudflare-tunnel \
+#     -n cloudflare --create-namespace -f basic-web-app.yaml
+
+replicaCount: 2
+
+cloudflare:
+  # Tunnel created with: cloudflared tunnel create my-k8s-tunnel
+  tunnelName: "my-k8s-tunnel"
+  
+  # Reference to existing Kubernetes secret containing credentials.json
+  secretName: "tunnel-creds"
+  
+  # Ingress rules - route traffic to services
+  ingress:
+    - hostname: app.example.com
+      service: http://nginx.default.svc.cluster.local:80
+
+# Resource limits
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 50m
+    memory: 64Mi
