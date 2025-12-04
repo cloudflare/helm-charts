@@ -39,8 +39,16 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{- if .Values.metrics.enabled }}
+          ports:
+            - name: metrics
+              containerPort: {{ .Values.metrics.port }}
+              protocol: TCP
+          {{- end }}
           args:
             - tunnel
+            - '--protocol'
+            - {{ .Values.cloudflare.protocol }}
             # Points cloudflared to the config file, which configures what
             # cloudflared will actually do. This file is created by a ConfigMap.
             - --config
@@ -51,7 +59,7 @@ spec:
               # Cloudflared has a /ready endpoint which returns 200 if and only if
               # it has an active connection to the edge.
               path: /ready
-              port: 2000
+              port: {{ .Values.metrics.port }}
             failureThreshold: 1
             initialDelaySeconds: 10
             periodSeconds: 10

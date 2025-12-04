@@ -10,6 +10,8 @@ cloudflare:
   tunnelId: ""
   # The secret for the tunnel.
   secret: ""
+  # The protocol to use for the tunnel.  This is usually "auto" or "quic".
+  protocol: "auto"
   # If defined, no secret is created for the credentials, and instead, the secret referenced is used
   secretName: null
   # If true, turn on WARP routing for TCP
@@ -80,3 +82,17 @@ tolerations: []
 
 # Default affinity is to spread out over nodes; use this to override.
 affinity: {}
+
+metrics:
+  enabled: true
+  # Port where cloudflared serves /metrics and /ready (see configmap.yaml).
+  port: 2000
+  service:
+    annotations: {}
+  serviceMonitor:
+    enabled: false
+    interval: 30s
+    scrapeTimeout: 10s
+    additionalLabels: {}
+    metricRelabelings: []
+    relabelings: []
