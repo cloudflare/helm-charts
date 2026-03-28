@@ -15,7 +15,7 @@ cloudflare:
   # If true, turn on WARP routing for TCP
   enableWarp: false
   # Define ingress rules for the tunnel. See
-  # https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/configuration/configuration-file/ingress
+  # https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/do-more-with-tunnels/local-management/configuration-file/#file-structure-for-published-applications
   ingress: []
     # The first rule proxies traffic to the httpbin sample service named web-server at port 80
     # - hostname: tunnel.example.com
