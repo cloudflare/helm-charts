@@ -1,4 +1,4 @@
-name: Release Charts
+name: Release Charts to OCI
 
 on:
   push:
@@ -7,28 +7,39 @@ on:
 
 jobs:
   release:
-    # depending on default permission settings for your org (contents being read-only or read-write for workloads), you will have to add permissions
-    # see: https://docs.github.com/en/actions/security-guides/automatic-token-authentication#modifying-the-permissions-for-the-github_token
     permissions:
-      contents: write
+      contents: read
+      packages: write # Crucial: Allows the action to push OCI packages to GHCR
+
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Configure Git
-        run: |
-          git config user.name "$GITHUB_ACTOR"
-          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
-
       - name: Install Helm
-        uses: azure/setup-helm@v3
+        uses: azure/setup-helm@v4
 
-      - name: Run chart-releaser
-        uses: helm/chart-releaser-action@v1.5.0
-        with:
-          charts_dir: charts
-        env:
-          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+      - name: Login to GitHub Container Registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | helm registry login ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - name: Package and Push Helm Charts
+        run: |
+          # GHCR requires the namespace (repository owner) to be entirely lowercase
+          REPO_OWNER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
+          
+          # Iterate over each directory in the charts folder
+          for chart in charts/*; do
+            if [ -d "$chart" ]; then
+              echo "Packaging $chart..."
+              
+              # Package the chart and extract the generated file path
+              PKG_PATH=$(helm package "$chart" | awk '{print $NF}')
+              
+              echo "Pushing $PKG_PATH to GHCR..."
+              
+              # Push the packaged chart to the OCI registry
+              helm push "$PKG_PATH" oci://ghcr.io/$REPO_OWNER
+            fi
+          done
